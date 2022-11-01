@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상품</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>이름</th>
+            <th>가격</th>
+            <th>재고</th>
+            <th>브랜드</th>
+        </tr>
+        <tr th:object="${productVO}"> <!--부모에 접근할 때는 달러심볼이 아닌 참조의 표시인 *-->
+            <td th:text="*{name}"></td>
+            <td th:text="*{price}"></td>
+            <td th:text="*{stock}"></td>
+            <td th:text="*{brand}"></td>
+        </tr>
+    </table>
+</body>
+</html>

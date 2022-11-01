@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>ex01</artifactId>
+    <artifactId>ex02</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ex01</name>
-    <description>MyBatis</description>
+    <name>ex02</name>
+    <description>controller</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -130,6 +130,26 @@
     </dependencies>
 
     <build>
+<!-- 이거 없으면 배포파일 빠지고 된다 -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.setting</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

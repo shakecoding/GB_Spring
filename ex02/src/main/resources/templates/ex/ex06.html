@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> <!--th를 붙이면 뒤에있는 라이브러리를 쓰겠다.-->
+<head>
+    <meta charset="UTF-8">
+    <title>개인정보</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>이름</th>
+        <th>나이</th>
+    </tr>
+    <tr th:object="${memberVO}"> <!--부모에 접근할 때는 달러심볼이 아닌 참조의 표시인 *-->
+        <td th:text="*{name}"></td>
+        <td th:text="*{age}"></td>
+    </tr>
+</table>
+</body>
+</html>
