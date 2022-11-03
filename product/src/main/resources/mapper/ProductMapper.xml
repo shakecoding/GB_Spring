@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.product.mapper.ProductMapper">
+    <select id="getList" resultType="productVO">
+        SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_STOCK, PRODUCT_BRAND, PRODUCT_REGISTER_DATE, PRODUCT_UPDATE_DATE
+        FROM TBL_PRODUCT
+    </select>
+
+    <insert id="insert">
+        INSERT INTO TBL_PRODUCT (PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_STOCK, PRODUCT_BRAND, PRODUCT_REGISTER_DATE, PRODUCT_UPDATE_DATE)
+        VALUES(SEQ_PRODUCT.NEXTVAL, #{productName}, #{productPrice}, #{productStock}, #{productBrand}, SYSDATE, SYSDATE)
+    </insert>
+
+</mapper>

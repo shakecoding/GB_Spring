@@ -3,8 +3,11 @@ package com.example.ex02.controller;
 import com.example.ex02.domain.vo.MemberVO;
 import com.example.ex02.domain.vo.ProductVO;
 import com.example.ex02.domain.vo.TaskVO;
+import com.example.ex02.mapper.TimeMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,17 +19,22 @@ import java.util.Date;
 @Slf4j
 @RequestMapping("/ex/*") // 서블릿으로 갈 수 있게끔 경로를 등록해주는 곳.
 // 이걸로 시작하는 애들 다 들어와 (상위 경로로 판단.)
+@RequiredArgsConstructor
 public class ExampleController {
+
+    private final TimeMapper timeMapper;
 
     @RequestMapping(value = "ex01", method = {RequestMethod.GET, RequestMethod.POST}) // value 생략하면 get, post 정할 수 없을 것 같당.
     // 위에 경로 뒤에 들어갈 경로를 적어주는 것.
-    public void ex01(){
+    public void ex01(Model model){
         log.info("ex01.....................");
         // return 을 String 타입으로 해 주면 그 String의 html 을 찾아서 실행해준다.
         // 없으면 경로에 해당하는 것을 찾는다.
         // 기본적으로 templates 안에서 찾음.
         // 경로를 추가하면 앞에 경로까지 적어준다. 예) test/index
         // 뒤에 .html 을 적어주면 2중으로 들어가기에 안된다.
+
+//        model.addAllAttributes("now", timeMapper.getTime());
     }
 
     // getParameter 로 쿼리스트링을 받아야 했지만,
