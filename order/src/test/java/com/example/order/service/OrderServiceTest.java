@@ -42,18 +42,15 @@ public class OrderServiceTest {
 //    조회 테스트
     @Test
     public void showTest(){
-        orderSerive.show("2022110310");
+        orderSerive.show(3L).forEach(order -> {
+            log.info(order.getOrderId() + ": " + order.getItemName() + ": " + order.getOrderDate() + ": " + order.getOrderPrice());
+        });
     }
-    
+
 //    전체 조회 테스트
     @Test
     public void showAllTest(){
-        orderSerive.showAll();
-    }
-
-    @Test
-    public void showAllDTOTest(){
-        orderSerive.showAllDTO();
+        orderSerive.showAll().stream().map(OrderDTO::toString).forEach(log::info);
     }
 }
 

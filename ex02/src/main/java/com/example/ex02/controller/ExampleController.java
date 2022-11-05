@@ -1,7 +1,6 @@
 package com.example.ex02.controller;
 
 import com.example.ex02.domain.vo.MemberVO;
-import com.example.ex02.domain.vo.ProductVO;
 import com.example.ex02.domain.vo.TaskVO;
 import com.example.ex02.mapper.TimeMapper;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 // 스프링에 등록해주는 것
 @Controller
@@ -103,19 +103,29 @@ public class ExampleController {
         log.info("gender: " + gender);
     }
 
+    @GetMapping("ex08")
+    public void ex08(@RequestParam("data") List<String> datas){
+        log.info(datas.toString());
+    }
+
+    @GetMapping("ex09")
+    public void ex09(List<MemberVO> members){
+        log.info(members.toString());
+    }
+
     // [실습 1]
 //    외부에서 상품명, 상품가격, 상품재고, 브랜드 전달받아서 화면에 전송
 //    화면에서 4개 정보 입력 후 form 태그로 전송한다.
-    @GetMapping("ex08")
-    public void ex08(){
-
-    }
-
-    @GetMapping("ex08_1")
-    public void ex08_1(ProductVO productVO){
-        log.info("ex08..................");
-        log.info("productVO : " + productVO);
-    }
+//    @GetMapping("ex08")
+//    public void ex08(){
+//
+//    }
+//
+//    @GetMapping("ex08_1")
+//    public void ex08_1(ProductVO productVO){
+//        log.info("ex08..................");
+//        log.info("productVO : " + productVO);
+//    }
 
     //    [실습 2]
 //    TaskVO 선언

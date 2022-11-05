@@ -29,13 +29,15 @@ public class BoardController {
 
 //    게시글 등록
     @GetMapping("/write")
-    public void write(){
-
+    public void write(Model model){
+        model.addAttribute("board", new BoardVO());
     }
 
     @PostMapping("/write")
-    public void write(BoardVO boardVO){
+    public RedirectView write(BoardVO boardVO, RedirectAttributes redirectAttributes){
         boardService.add(boardVO);
+        redirectAttributes.addFlashAttribute("boardNumber", boardVO.getBoardNumber());
+        return new RedirectView("list"); // 경로 앞에 / 를 쓰면 board 가 없어진다.
     }
 
 //    게시글 수정, 게시글 상세보기
