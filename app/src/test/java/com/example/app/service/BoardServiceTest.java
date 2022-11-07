@@ -1,6 +1,7 @@
 package com.example.app.service;
 
 import com.example.app.domain.vo.BoardVO;
+import com.example.app.domain.vo.Criteria;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,8 +15,8 @@ public class BoardServiceTest {
     private BoardService boardService;
 
     @Test
-    public void showTest(){
-        boardService.show().stream().map(BoardVO::toString).forEach(log::info);
+    public void showTest(Criteria criteria){
+        boardService.show(criteria).stream().map(BoardVO::toString).forEach(log::info);
     }
 
     @Test
@@ -42,5 +43,10 @@ public class BoardServiceTest {
         BoardVO boardVO = boardService.find(boardNumber);
         Assertions.assertNotNull(boardVO);
         boardService.delete(boardNumber);
+    }
+
+    @Test
+    public void getTotalTest(){
+        log.info("board count" + boardService.getTotal());
     }
 }

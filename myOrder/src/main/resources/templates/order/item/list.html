@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>메인 페이지</title>
+</head>
+<body>
+    <table style="border-style: solid; text-align: center">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>상품명</th>
+                <th>가격</th>
+                <th>남은 수량</th>
+            </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="item:${items}">
+            <tr th:object="${item}">
+                <td th:text="*{itemNumber}"></td>
+                <td th:text="*{itemName}"></td>
+                <td th:text="*{itemPrice}"></td>
+                <td th:text="*{itemStock}"></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <form action="add">
+        <th:block th:each="item:${items}">
+            <tr th:object="${item}">
+                <input name="itemNumber" type="checkbox" th:text="*{itemNumber}">
+                <input name="itemCount" type="text" placeholder="수량을 입력하세요">
+            </tr>
+        </th:block>
+        <button type="submit">주문하기</button>
+    </form>
+    <h3>검색</h3>
+    <form th:action="@{/order/searchList}">
+        <input type="text" name="itemName" placeholder="주문 개수를 확인하고 싶은 상품 이름 입력">
+        <button type="submit">결과보기</button>
+    </form>
+
+    <a href="/order/list">주문내역창으로 이동</a>
+</body>
+<!-- script -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script th:inline="javascript">
+
+
+
+
+</script>
+</html>

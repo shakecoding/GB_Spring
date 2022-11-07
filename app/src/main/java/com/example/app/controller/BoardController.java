@@ -1,6 +1,8 @@
 package com.example.app.controller;
 
 import com.example.app.domain.vo.BoardVO;
+import com.example.app.domain.vo.Criteria;
+import com.example.app.domain.vo.PageDTO;
 import com.example.app.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,13 +25,19 @@ public class BoardController {
 
 //    게시글 목록
     @GetMapping("/list")
-    public void list(Model model){ // 데이터 전달자는 Model
-        model.addAttribute("boards", boardService.show());
+    public void list(Criteria criteria,  Model model){ // 데이터 전달자는 Model
+        PageDTO pageDTO = new PageDTO();
+        if(criteria.getPage() == 0){
+            criteria.createCriteria();
+        }
+        pageDTO.createPageDTO(criteria, boardService.getTotal());
+        model.addAttribute("boards", boardService.show(criteria));
+        model.addAttribute("pagination", pageDTO);
     }
 
 //    게시글 등록
     @GetMapping("/write")
-    public void write(Model model){
+    public void write(Criteria criteria, Model model){
         model.addAttribute("board", new BoardVO());
     }
 
@@ -42,12 +50,12 @@ public class BoardController {
 
 //    게시글 수정, 게시글 상세보기
     @GetMapping(value = {"read", "update"})
-    public void read(Long boardNumber, Model model){
+    public void read(Long boardNumber, Criteria criteria ,Model model){
         model.addAttribute("board", boardService.find(boardNumber));
     }
 
     @PostMapping("/update")
-    public RedirectView update(BoardVO boardVO, RedirectAttributes redirectAttributes){
+    public RedirectView update(BoardVO boardVO, Criteria criteria ,RedirectAttributes redirectAttributes){
         boardService.update(boardVO);
         // read로 넘어가기 위해선 boardNumber 를 들고가야한다. 몇번 게시글인지 알아야하기에
 
@@ -55,6 +63,8 @@ public class BoardController {
         // 이렇게 쓰면 응답하는 곳 뒤에 쿼리스트링을 알아서 만들어준다.
         // 다른 컨트롤러로 이동할 때에는 쿼리스트링으로 전달해야 한다.
         redirectAttributes.addAttribute("boardNumber", boardVO.getBoardNumber());
+        redirectAttributes.addAttribute("page", criteria.getPage());
+        redirectAttributes.addAttribute("page", criteria.getAmount());
 
         // 두번째 방법! 세션으로 넘기는 것
         // 화면에서만 사용할 때에는 Flash영역을 사용하여 전달해야 한다.

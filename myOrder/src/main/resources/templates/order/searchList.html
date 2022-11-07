@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>검색 결과</title>
+</head>
+<body>
+    <h2>검색 결과 페이지</h2>
+
+    <table style="border-style: solid; text-align: center">
+        <thead>
+        <tr>
+            <th>주문번호</th>
+            <th>주문날짜</th>
+            <th>상품번호</th>
+            <th>주문수량</th>
+            <th>주문가격</th>
+            <th>상품이름</th>
+            <th>상품가격</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="order:${orders}">
+            <tr th:object="${order}">
+                <td th:text="*{orderId}"></td>
+                <td th:text="*{orderDate}"></td>
+                <td th:text="*{itemNumber}"></td>
+                <td th:text="*{itemCount}"></td>
+                <td th:text="*{orderPrice}"></td>
+                <td th:text="*{itemName}"></td>
+                <td th:text="*{itemPrice}"></td>
+            </tr>
+        </th:block>
+        총 주문 개수는 <span th:text="${count}"></span>개 입니다
+        </tbody>
+    </table>
+</body>
+</html>
